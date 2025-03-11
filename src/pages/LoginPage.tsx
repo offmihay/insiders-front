@@ -5,6 +5,7 @@ import {
   OutlinedInput,
   Container,
   Typography,
+  Alert,
 } from "@mui/material";
 import { useAuthMutation } from "../api/auth";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +16,10 @@ const LoginPage = () => {
   const { signIn } = useAuth();
 
   const navigate = useNavigate();
-  const { loginMutation } = useAuthMutation();
+  const {
+    loginMutation,
+    loginMutation: { error },
+  } = useAuthMutation();
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -68,6 +72,7 @@ const LoginPage = () => {
             type="password"
             className="w-full h-10 mt-2"
           />
+          {error && <Alert severity="error">{error.message}</Alert>}
           <Button variant="text" onClick={() => navigate("/signup")}>
             Dont have an account? Sign Up
           </Button>

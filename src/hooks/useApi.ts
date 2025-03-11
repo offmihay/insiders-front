@@ -38,7 +38,16 @@ const useApi = () => {
     const response = await fetch(url.toString(), requestOptions);
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const respObj =
+        response.headers.has("Content-Type") &&
+        response.headers.get("Content-Type")?.includes("application/json")
+          ? await response.json()
+          : null;
+      throw new Error(
+        respObj?.message
+          ? JSON.stringify(respObj.message)
+          : `HTTP error! status: ${response.status}`
+      );
     }
 
     const data = await response.json();
