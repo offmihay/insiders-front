@@ -34,7 +34,7 @@ const TaskCard = (props: Props) => {
             {data.description}
           </Typography>
           <div className="label-status mt-2">
-            <Typography variant="body2" sx={{ color: "black" }}>
+            <Typography variant="body2" sx={{ color: "white" }}>
               {labels[data.status]}
             </Typography>
           </div>

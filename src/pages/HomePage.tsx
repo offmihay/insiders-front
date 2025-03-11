@@ -10,10 +10,12 @@ import React, { useState } from "react";
 import { Status, Task, useTasksQuery } from "../api/tasks";
 import TaskCard from "../components/Card";
 import ModalForm from "../components/ModalForm";
+import { useAuth } from "../hooks/useAuth";
 
 const HomePage: React.FC = () => {
   const [status, setStatus] = useState<Task["status"]>(Status.NONE);
   const [modalOpen, setModalOpen] = useState(false);
+  const { signOut } = useAuth();
 
   const [activeEditingTask, setActiveEditingTask] = useState<Task>();
 
@@ -54,13 +56,14 @@ const HomePage: React.FC = () => {
   return (
     <div className="wrapper">
       <Container maxWidth="sm">
+        <div className="mb-6">
+          <Button variant="outlined" className="w-full" onClick={signOut}>
+            Sign Out
+          </Button>
+        </div>
         <div className="todo-container">
           <div className="flex justify-between px-6 h-10">
-            <Button
-              variant="outlined"
-              href="#outlined-buttons"
-              onClick={() => handleOpenModal()}
-            >
+            <Button variant="outlined" onClick={() => handleOpenModal()}>
               Create Task
             </Button>
             <Select
