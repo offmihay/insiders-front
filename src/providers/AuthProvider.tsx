@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("token")
   );
-  console.log(token);
 
   const signIn = (token: string) => {
     localStorage.setItem("token", token);
